@@ -3,6 +3,7 @@ package classes;
 import java.util.Scanner;
 
 public class App {
+    //this whitespace string for new pull request
     public static int currentAccountId;
     static Scanner sc = new Scanner(System.in);
     static AutomaticTallerMachine atm = new AutomaticTallerMachine();
