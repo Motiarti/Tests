@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,11 +6,14 @@ public class AutomaticTallerMachine {
     private int operation;
     private double withdrawSum;
     private double depositSum;
-    private int currentAccountId;
-    List<Account> accountList = generateAccounts();
-    Account currentAccount = accountList.get(currentAccountId);
+    private final int currentAccountId;
+    List<Account> accountList;
+    Account currentAccount;
 
-    public AutomaticTallerMachine() {
+    public AutomaticTallerMachine(int currentAccountId, List<Account> accountList) {
+        this.currentAccountId = currentAccountId;
+        this.accountList = accountList;
+        this.currentAccount = accountList.get(currentAccountId);
     }
 
     public void displayMainMenu() {
@@ -96,19 +98,5 @@ public class AutomaticTallerMachine {
             }
         }
         return depositSum;
-    }
-
-    public void completeService() {
-        System.out.println("Обслуживание завершено");
-    }
-
-    private static List<Account> generateAccounts() {
-        double initialBalance = 10000.0;
-        int numberOfAccounts = 10;
-        List<Account> output = new ArrayList<>();
-        for (int i = 0; i < numberOfAccounts; i++) {
-            output.add(new Account(i, initialBalance));
-        }
-        return output;
     }
 }

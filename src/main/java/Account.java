@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Account {
@@ -59,22 +61,34 @@ public class Account {
     public void deposit(double amount) {
         setBalance(getBalance() + amount);
     }
+
+    static List<Account> generateAccounts() {
+        double initialBalance = 10000.0;
+        int numberOfAccounts = 10;
+        List<Account> output = new ArrayList<>();
+        for (int i = 0; i < numberOfAccounts; i++) {
+            output.add(new Account(i, initialBalance));
+        }
+        return output;
+    }
+
+    static int currentAccountId;
+
     public static int getAccountId() {
         Scanner sc = new Scanner(System.in);
-        int currentAccountId;
-        AutomaticTallerMachine atm = new AutomaticTallerMachine();
         System.out.print("Введите номер счета: ");
         currentAccountId = sc.nextInt();
         while (true) {
             if (currentAccountId == 99) {
-                atm.completeService();
-                break;
-            } else if (!(currentAccountId >= 0 && currentAccountId < 10)) {
+                System.out.println("Обслуживание завершено");
+                System.exit(0);
+            }
+            if (!(currentAccountId >= 0 && currentAccountId < 10)) {
+                System.out.println("Не верный номер счета");
                 System.out.println("Для завершения обслуживания введите 99");
                 System.out.print("Введите номер счета: ");
                 currentAccountId = sc.nextInt();
             } else {
-                atm.displayMainMenu();
                 break;
             }
         }
