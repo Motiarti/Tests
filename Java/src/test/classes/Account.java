@@ -1,6 +1,7 @@
 package classes;
 
 import java.util.Date;
+import java.util.Scanner;
 
 public class Account {
     private int id;
@@ -59,5 +60,26 @@ public class Account {
 
     public void deposit(double amount) {
         setBalance(getBalance() + amount);
+    }
+    public static int getAccountId() {
+        Scanner sc = new Scanner(System.in);
+        int currentAccountId;
+        AutomaticTallerMachine atm = new AutomaticTallerMachine();
+        System.out.print("¬ведите номер счета: ");
+        currentAccountId = sc.nextInt();
+        while (true) {
+            if (currentAccountId == 99) {
+                atm.completeService();
+                break;
+            } else if (!(currentAccountId >= 0 && currentAccountId < 10)) {
+                System.out.println("ƒл€ завершени€ обслуживани€ введите 99");
+                System.out.print("¬ведите номер счета: ");
+                currentAccountId = sc.nextInt();
+            } else {
+                atm.displayMainMenu();
+                break;
+            }
+        }
+        return currentAccountId;
     }
 }
