@@ -1,10 +1,6 @@
-package classes;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import static classes.Account.getAccountId;
 
 public class AutomaticTallerMachine {
     Scanner scanner = new Scanner(System.in);
@@ -65,7 +61,7 @@ public class AutomaticTallerMachine {
             case 4 -> {
                 System.out.println();
                 System.out.println("Вы вышли из меню. Введите номер счета или введите 99 для завершения обслуживания \n");
-                getAccountId();
+                Account.getAccountId();
             }
         }
     }
