@@ -13,25 +13,13 @@ public class Host {
         return output;
     }
 
-    public static int getAccountId() {
-        int currentAccountId;
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Введите номер счета: ");
-        currentAccountId = sc.nextInt();
-        while (true) {
-            if (currentAccountId == 99) {
-                System.out.println("Обслуживание завершено");
-                System.exit(0);
-            }
-            if (!(currentAccountId >= 0 && currentAccountId < 10)) {
-                System.out.println("Не верный номер счета");
-                System.out.println("Для завершения обслуживания введите 99");
-                System.out.print("Введите номер счета: ");
-                currentAccountId = sc.nextInt();
-            } else {
-                break;
+    public static boolean isAccountExists(List<Account> accounts, int id) {
+        boolean isAccountExist = false;
+        for (Account account : accounts) {
+            if (account.getId() == id) {
+                isAccountExist = !isAccountExist;
             }
         }
-        return currentAccountId;
+        return isAccountExist;
     }
 }

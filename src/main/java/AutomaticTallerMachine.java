@@ -1,19 +1,14 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class AutomaticTallerMachine {
-    private final int currentAccountId;
-    private final List<Account> accountList;
     private final Account currentAccount;
-    Scanner scanner = new Scanner(System.in);
     private int operation;
     private double withdrawSum;
     private double depositSum;
+    Scanner scanner = new Scanner(System.in);
 
-    public AutomaticTallerMachine(int currentAccountId, List<Account> accountList) {
-        this.currentAccountId = currentAccountId;
-        this.accountList = accountList;
-        this.currentAccount = accountList.get(currentAccountId);
+    public AutomaticTallerMachine(Account currentAccount) {
+        this.currentAccount = currentAccount;
     }
 
     public void displayMainMenu() {
@@ -23,21 +18,21 @@ public class AutomaticTallerMachine {
         System.out.println("3: положить на счет");
         System.out.println("4: выйти");
         selectOperation();
-        operations(operation);
+        doOperation(operation);
     }
 
     private void selectOperation() {
         System.out.print("Введите пункт меню: ");
         operation = scanner.nextInt();
-        if (operation < 1 || operation > 4) {
+        while (operation < 1 || operation > 4) {
             System.out.println();
-            System.out.println("Неверная операция \n");
-            displayMainMenu();
+            System.out.println("Неверная операция");
+            System.out.print("Введите пункт меню: ");
+            operation = scanner.nextInt();
         }
     }
 
-    public void operations(int operation) {
-        Account currentAccount = accountList.get(currentAccountId);
+    public void doOperation(int operation) {
         switch (operation) {
             case 1 -> {
                 System.out.println();
@@ -62,8 +57,8 @@ public class AutomaticTallerMachine {
             }
             case 4 -> {
                 System.out.println();
-                System.out.println("Вы вышли из меню. Введите номер счета или введите 99 для завершения обслуживания \n");
-                Host.getAccountId();
+                System.out.println("Обслуживание завершено");
+                System.exit(0);
             }
         }
     }
@@ -71,6 +66,8 @@ public class AutomaticTallerMachine {
     private double getWithdrawSum() {
         withdrawSum = scanner.nextDouble();
         while (withdrawSum < 0) {
+            System.out.println("Введена некорректная сумма");
+            withdrawSum = scanner.nextDouble();
             if (withdrawSum > currentAccount.getBalance()) {
                 System.out.println("Введена сумма больше баланса счета. Введите сумму меньше баланса: ");
                 withdrawSum = scanner.nextDouble();
