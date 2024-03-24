@@ -1,10 +1,11 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
-        int accountId = Account.getAccountId();
-        List<Account> accountList = Account.generateAccounts();
+        List<Account> accountList = Host.generateAccounts();
+        int accountId = Host.getAccountId();
         AutomaticTallerMachine atm = new AutomaticTallerMachine(accountId, accountList);
         startATM(accountId, accountList, atm);
     }

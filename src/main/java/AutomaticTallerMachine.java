@@ -2,13 +2,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AutomaticTallerMachine {
+    private final int currentAccountId;
+    private final List<Account> accountList;
+    private final Account currentAccount;
     Scanner scanner = new Scanner(System.in);
     private int operation;
     private double withdrawSum;
     private double depositSum;
-    private final int currentAccountId;
-    List<Account> accountList;
-    Account currentAccount;
 
     public AutomaticTallerMachine(int currentAccountId, List<Account> accountList) {
         this.currentAccountId = currentAccountId;
@@ -63,22 +63,15 @@ public class AutomaticTallerMachine {
             case 4 -> {
                 System.out.println();
                 System.out.println("¬ы вышли из меню. ¬ведите номер счета или введите 99 дл€ завершени€ обслуживани€ \n");
-                Account.getAccountId();
+                Host.getAccountId();
             }
         }
     }
 
     private double getWithdrawSum() {
         withdrawSum = scanner.nextDouble();
-        while (true) {
-            if (withdrawSum > 0 && withdrawSum < currentAccount.getBalance()) {
-                break;
-            }
-            else if (withdrawSum < 0) {
-                System.out.println("¬ведена не корректна€ сумма. ¬ведите сумму снова: ");
-                withdrawSum = scanner.nextDouble();
-            }
-            else if (withdrawSum > currentAccount.getBalance()) {
+        while (withdrawSum < 0) {
+            if (withdrawSum > currentAccount.getBalance()) {
                 System.out.println("¬ведена сумма больше баланса счета. ¬ведите сумму меньше баланса: ");
                 withdrawSum = scanner.nextDouble();
             }
@@ -88,14 +81,9 @@ public class AutomaticTallerMachine {
 
     private double getDepositSum() {
         depositSum = scanner.nextDouble();
-        while (true) {
-            if (depositSum > 0) {
-                break;
-            }
-            else if (depositSum < 0) {
-                System.out.println("¬ведена не корректна€ сумма. ¬ведите сумму снова: ");
-                depositSum = scanner.nextDouble();
-            }
+        while (depositSum < 0) {
+            System.out.println("¬ведена не корректна€ сумма. ¬ведите сумму снова: ");
+            depositSum = scanner.nextDouble();
         }
         return depositSum;
     }
