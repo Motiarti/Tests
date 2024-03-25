@@ -14,12 +14,14 @@ public class Host {
     }
 
     public static boolean isAccountExists(List<Account> accounts, int id) {
-        boolean isAccountExist = false;
         for (Account account : accounts) {
             if (account.getId() == id) {
-                isAccountExist = !isAccountExist;
+                return true;
             }
         }
-        return isAccountExist;
+        return false;
+
+        // TODO: do same thing with stream api in one line:
+        // return accounts.stream().anyMatch(/*YOUR CODE HERE*/);
     }
 }
