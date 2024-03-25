@@ -6,7 +6,7 @@ public class App {
 
     public static void main(String[] args) {
         int accountId = getAccountId();
-        Account account = setAccount(accountList, accountId);
+        Account account = selectAccount(accountList, accountId);
         AutomaticTallerMachine atm = new AutomaticTallerMachine(account);
         atm.displayMainMenu();
     }
@@ -23,13 +23,15 @@ public class App {
         return currentAccountId;
     }
 
-    public static Account setAccount (List<Account> accountList, int currentAccountId) {
-        Account output = null;
+    private static Account selectAccount(List<Account> accountList, int currentAccountId) {
         for (Account account : accountList) {
             if (currentAccountId == account.getId()) {
-                output = account;
+                return account;
             }
         }
-        return output;
+        throw new RuntimeException(String.format("—чета с номером %d не существует", currentAccountId));
+
+        // TODO: do same thing with stream api:
+        // return accountList.stream().filter(/*YOUR CODE HERE*/).findFirst().orElseThrow(/*CREATE EXCEPTION WHICH SAYS "ACCOUNT WITH ID(currentAccountId) DOES NOT EXIST"*/);
     }
 }
