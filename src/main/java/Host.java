@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Host {
-    static List<Account> generateAccounts() {
+    public static List<Account> generateAccounts() {
         double initialBalance = 10000.0;
         int numberOfAccounts = 10;
         List<Account> output = new ArrayList<>();
@@ -11,6 +13,9 @@ public class Host {
             output.add(new Account(i, initialBalance));
         }
         return output;
+
+        // TODO: do same thing with stream api in one line:
+        // return IntStream.range(/*YOU CODE HERE*/).mapToObj(/*YOUR CODE HERE*/).toList();
     }
 
     public static boolean isAccountExists(List<Account> accounts, int id) {
