@@ -11,15 +11,13 @@ public class App {
         atm.displayMainMenu();
     }
 
-    public static int getAccountId() {
-        int currentAccountId;
+    private static int getAccountId() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("¬ведите номер счета: ");
-        currentAccountId = sc.nextInt();
-        while (!(Host.isAccountExists(accountList, currentAccountId))) {
+        int currentAccountId;
+        do {
             System.out.print("¬ведите номер счета: ");
             currentAccountId = sc.nextInt();
-        }
+        } while(!Host.isAccountExists(accountList, currentAccountId));
         return currentAccountId;
     }
 
