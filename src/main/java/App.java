@@ -10,11 +10,7 @@ public class App {
         while (true) {
             int accountId = getAccountId(host);
             Account account;
-            try {
-                account = host.selectAccount(accountId);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            account = host.selectAccount(accountId);
             AutomaticTallerMachine atm = new AutomaticTallerMachine(account);
             atm.displayMainMenu();
         }
