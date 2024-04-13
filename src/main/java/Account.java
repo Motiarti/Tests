@@ -1,7 +1,4 @@
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
 
 public class Account {
     private int id;
@@ -16,7 +13,7 @@ public class Account {
     public Account(int id, double balance) {
         this.id = id;
         this.balance = balance;
-        dateCreated = new Date();
+        dateCreated = new Date(2024, 4, 11);
     }
 
     public int getId() {

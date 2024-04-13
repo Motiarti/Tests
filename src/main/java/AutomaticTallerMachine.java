@@ -58,7 +58,7 @@ public class AutomaticTallerMachine {
             case 4 -> {
                 System.out.println();
                 System.out.println("Обслуживание завершено");
-                System.exit(0);
+//                System.exit(0);
             }
         }
     }
