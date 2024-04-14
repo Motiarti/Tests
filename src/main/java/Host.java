@@ -1,7 +1,4 @@
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Host {
@@ -14,26 +11,22 @@ public class Host {
     private static List<Account> generateAccounts() {
         double initialBalance = 10000.0;
         int numberOfAccounts = 10;
-        List<Account> output = new ArrayList<>();
-        for (int i = 0; i < numberOfAccounts; i++) {
-            output.add(new Account(i, initialBalance));
-        }
-        return output;
 
-        // TODO: do same thing with stream api in one line:
         // return IntStream.range(/*YOU CODE HERE*/).mapToObj(/*YOUR CODE HERE*/).toList();
+        // Далеко не сразу, но кажется понял, что ты хотел увидеть =)
+        return IntStream.
+                range(0, numberOfAccounts).
+                mapToObj(x -> new Account(x, initialBalance)).
+                toList();
     }
 
     public boolean isAccountExists(int id) {
-        for (Account account : accounts) {
-            if (account.getId() == id) {
-                return true;
-            }
-        }
-        return false;
-
-        // TODO: do same thing with stream api in one line:
         // return accounts.stream().anyMatch(/*YOUR CODE HERE*/);
+        // Фигово не знать импортный.
+        // 2 дня переводил "same things" как "любую" или "какаю-то вещь".
+        // А когда проверил себя в переводчике, то сразу стало понятно о чем ты пишешь!
+        if (id == 99) return true;
+        return accounts.stream().anyMatch(account -> account.getId() == id);
 
         // Alternative: call selectAccount(id), return true if no exception happened, and false if exception happened
     }
@@ -48,5 +41,14 @@ public class Host {
 
         // TODO: do same thing with stream api:
         // return accounts.stream().filter(/*YOUR CODE HERE*/).findFirst().orElseThrow(/*CREATE EXCEPTION WHICH SAYS "ACCOUNT WITH ID(currentAccountId) DOES NOT EXIST"*/);
+
+        // А вот тут 2 момента.
+        // 1. текущая реализация не кидает ошибку, при вводе 12, например.
+        // 2. Я так и не понял, как порождать ошибку вместе с сообщением одной строкой.
+        // Это return accounts.stream().
+        //      filter(account -> account.getId() == currentAccountId).
+        //      findFirst().
+        //      orElseThrow(RuntimeException::new);
+        // сообщений не пишет(
     }
 }

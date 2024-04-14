@@ -13,10 +13,10 @@ public class AutomaticTallerMachine {
 
     public void displayMainMenu() {
         System.out.println("Основное меню");
-        System.out.println("1: проверить баланс счета");
-        System.out.println("2: снять со счета");
-        System.out.println("3: положить на счет");
-        System.out.println("4: выйти");
+        System.out.println("0: проверить баланс счета");
+        System.out.println("1: снять со счета");
+        System.out.println("2: положить на счет");
+        System.out.println("3: выйти");
         selectOperation();
         doOperation(operation);
     }
@@ -24,7 +24,7 @@ public class AutomaticTallerMachine {
     private void selectOperation() {
         System.out.print("Введите пункт меню: ");
         operation = scanner.nextInt();
-        while (operation < 1 || operation > 4) {
+        while (operation < 0 || operation > 3) {
             System.out.println();
             System.out.println("Неверная операция");
             System.out.print("Введите пункт меню: ");
@@ -33,13 +33,14 @@ public class AutomaticTallerMachine {
     }
 
     public void doOperation(int operation) {
-        switch (operation) {
-            case 1 -> {
+        MenuPoints menuPoints = MenuPoints.values()[operation];
+        switch (menuPoints) {
+            case BALANCE -> {
                 System.out.println();
                 System.out.println("Баланс равен " + currentAccount.getBalance() + "\n");
                 displayMainMenu();
             }
-            case 2 -> {
+            case WITHDRAW -> {
                 System.out.println();
                 System.out.print("Введите сумму для снятия со счета: ");
                 withdrawSum = getWithdrawSum();
@@ -47,7 +48,7 @@ public class AutomaticTallerMachine {
                 System.out.println("Баланс счета после снятия средств равен: " + currentAccount.getBalance() + "\n");
                 displayMainMenu();
             }
-            case 3 -> {
+            case DEPOSIT -> {
                 System.out.println();
                 System.out.print("Введите сумму для внесения на счет: ");
                 depositSum = getDepositSum();
@@ -55,10 +56,9 @@ public class AutomaticTallerMachine {
                 System.out.println("Баланс счета после внесения средств равен: " + currentAccount.getBalance() + "\n");
                 displayMainMenu();
             }
-            case 4 -> {
+            case EXIT -> {
                 System.out.println();
                 System.out.println("Обслуживание завершено");
-                System.exit(0);
             }
         }
     }
