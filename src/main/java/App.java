@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
         Host host = new Host();
         while (true) {
             int accountId = getAccountId(host);

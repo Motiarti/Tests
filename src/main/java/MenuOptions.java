@@ -6,6 +6,7 @@ public enum MenuOptions {
 
     private final String operation;
 
+
     MenuOptions(String operation) {
         this.operation = operation;
     }

@@ -9,6 +9,7 @@ public class Host {
         this.accounts = generateAccounts();
     }
 
+
     private static List<Account> generateAccounts() {
         double initialBalance = 10000.0;
         int numberOfAccounts = 10;
