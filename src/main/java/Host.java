@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Host {
     private final List<Account> accounts;
@@ -32,23 +33,18 @@ public class Host {
     }
 
     public Account selectAccount(int currentAccountId) {
-        for (Account account : accounts) {
-            if (currentAccountId == account.getId()) {
-                return account;
-            }
-        }
-        throw new RuntimeException(String.format("Счета с номером %d не существует", currentAccountId));
+        Stream<Account> streamOfAccounts = accounts.stream();
+        return streamOfAccounts.filter(
+                account -> account.getId() == currentAccountId).
+                findFirst().
+                orElseThrow(() -> new RuntimeException(String.format("Счета с номером %d не существует", currentAccountId)));
+
+        // Сделал, как ты написал. Понял, что не вызывал анонимную функцию "() ->".
+        // Но метод все еще не бросает исключений
 
         // TODO: do same thing with stream api:
         // return accounts.stream().filter(/*YOUR CODE HERE*/).findFirst().orElseThrow(/*CREATE EXCEPTION WHICH SAYS "ACCOUNT WITH ID(currentAccountId) DOES NOT EXIST"*/);
 
-        // А вот тут 2 момента.
-        // 1. текущая реализация не кидает ошибку, при вводе 12, например.
-        // 2. Я так и не понял, как порождать ошибку вместе с сообщением одной строкой.
-        // Это return accounts.stream().
-        //      filter(account -> account.getId() == currentAccountId).
-        //      findFirst().
-        //      orElseThrow(RuntimeException::new);
-        // сообщений не пишет(
+
     }
 }

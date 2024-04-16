@@ -13,15 +13,13 @@ public class AutomaticTallerMachine {
 
     public void displayMainMenu() {
         System.out.println("ќсновное меню");
-        System.out.println("0: проверить баланс счета");
-        System.out.println("1: сн€ть со счета");
-        System.out.println("2: положить на счет");
-        System.out.println("3: выйти");
-        selectOperation();
-        doOperation(operation);
+        for (MenuOptions option : MenuOptions.values()) {
+            System.out.println(option.getOperation());
+        }
+        doOperation(selectOperation());
     }
 
-    private void selectOperation() {
+    private MenuOptions selectOperation() {
         System.out.print("¬ведите пункт меню: ");
         operation = scanner.nextInt();
         while (operation < 0 || operation > 3) {
@@ -30,11 +28,11 @@ public class AutomaticTallerMachine {
             System.out.print("¬ведите пункт меню: ");
             operation = scanner.nextInt();
         }
+        return MenuOptions.values()[operation];
     }
 
-    public void doOperation(int operation) {
-        MenuPoints menuPoints = MenuPoints.values()[operation];
-        switch (menuPoints) {
+    public void doOperation(MenuOptions menuOptions) {
+        switch (menuOptions) {
             case BALANCE -> {
                 System.out.println();
                 System.out.println("Ѕаланс равен " + currentAccount.getBalance() + "\n");
