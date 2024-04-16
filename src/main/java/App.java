@@ -1,13 +1,15 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Host host = new Host();
-        int accountId = getAccountId(host);
-        Account account = host.selectAccount(accountId);
-        AutomaticTallerMachine atm = new AutomaticTallerMachine(account);
-        atm.displayMainMenu();
+        while (true) {
+            int accountId = getAccountId(host);
+            if (accountId == 99) System.exit(0);
+            Account account = host.selectAccount(accountId);
+            AutomaticTallerMachine atm = new AutomaticTallerMachine(account);
+            atm.displayMainMenu();
+        }
     }
 
     private static int getAccountId(Host host) {
