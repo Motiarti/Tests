@@ -25,7 +25,7 @@ public class AutomaticTallerMachine {
     private void selectOperation() {
         System.out.print("Введите пункт меню: ");
         operation = scanner.nextInt();
-        while (operation < 0 || operation > 3) {
+        while (operation < 0 || operation >= MenuOptions.values().length) {
             System.out.println();
             System.out.println("Неверная операция");
             System.out.print("Введите пункт меню: ");
