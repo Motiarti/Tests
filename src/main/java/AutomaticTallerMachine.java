@@ -11,6 +11,7 @@ public class AutomaticTallerMachine {
         this.currentAccount = currentAccount;
     }
 
+
     public void displayMainMenu() {
         System.out.println("Основное меню");
         System.out.println("0: проверить баланс счета");
